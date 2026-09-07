@@ -1,5 +1,7 @@
 # Release checks
 
+For current production results, see [live acceptance on 2026-09-08](live-acceptance-2026-09-08.md). The dated sections below preserve earlier development results; their deployment status is historical.
+
 ## Local verification
 
 Run the plugin-creator skill's `validate_plugin.py` against the plugin root and skill-creator's `quick_validate.py` against `skills/social-posting`. Run the backend MCP tests covering profiles, factory dispatch, posting controller metadata, OAuth redirects, and existing post/draft handlers.
