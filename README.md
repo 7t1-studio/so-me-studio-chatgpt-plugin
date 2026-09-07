@@ -1,10 +1,11 @@
 # So-me Studio plugin
 
-Version **1.1.0** supports social media text, image, and video posting. This separate plugin repository reuses So-me Studio's hosted MCP backend and branding from the Claude connector.
+Version **1.2.0** supports social media text, image, and video posting. This separate plugin repository reuses So-me Studio's hosted MCP backend and branding from the Claude connector.
 
 ## Included
 
 - Find connected social accounts.
+- Compare file sizes/types across destinations and decide how to handle incompatible media.
 - Upload images/videos or select existing library media.
 - Verify that uploads finished and match their declared type and size.
 - Save and edit text, image, and video drafts.
@@ -13,11 +14,11 @@ Version **1.1.0** supports social media text, image, and video posting. This sep
 - Review the posting calendar and publication status.
 - Edit, reschedule, cancel, delete, or retry posts when requested.
 
-The posting endpoint exposes 22 tools. Analytics, inbox, account administration, AI generation, bulk deletion, and other product features are excluded. Post types include TEXT, IMAGE, MULTIPLE_IMAGES, VIDEO, REEL, STORY, and CAROUSEL where the destination supports them. File format, duration, dimensions, and platform limits still apply.
+The posting endpoint exposes 23 tools. Analytics, inbox, account administration, AI generation, bulk deletion, and other product features are excluded. Post types include TEXT, IMAGE, MULTIPLE_IMAGES, VIDEO, REEL, STORY, and CAROUSEL where the destination supports them. File format, duration, dimensions, and platform limits still apply.
 
 ## Image and video upload flow
 
-1. Call `presign_media_upload` with each file's `filename`, `mimetype`, and exact `size` in bytes.
+1. Run `validate_post_media` for all intended destinations using local file metadata or existing library file IDs. Review each result and resolve any incompatibility or unknown checks with the user. Then call `presign_media_upload` with each file's `filename`, `mimetype`, and exact `size` in bytes.
 2. Upload the raw bytes with HTTP PUT to the returned `uploadUrl`, using the same Content-Type. The bundled `scripts/upload_media.py` streams local files without third-party dependencies; its input is a temporary JSON plan with `filePath`, `fileId`, `uploadUrl`, `mimetype`, and `size` for each file.
 3. Call `get_media_file` with `verifyUpload: true` for each returned `fileId`.
 4. Pass those `fileIds` and a matching `postType` to `create_post` or `create_draft`. Supply `scheduledAt` to schedule; omitting it on `create_post` publishes now. Saved draft media carries into `convert_draft`.
@@ -25,6 +26,12 @@ The posting endpoint exposes 22 tools. Analytics, inbox, account administration,
 The backend checks ownership and completed uploads before attaching media. Each post receives independent storage copies so deleting/reusing a library item does not break scheduled posts. Image selection order is retained during publishing. Existing drafts with only URLs need library file IDs attached before MCP conversion. No database migration is needed: draft media uses existing JSON metadata and posts use the existing file relation.
 
 Direct local upload requires access to the source file and an HTTP upload capability (the bundled helper requires Python 3). Clients that cannot transfer bytes can use media already uploaded through the So-me Studio app. Presigned URLs alone do not upload anything. This is upload support for your own files, not AI image/video generation.
+
+## Different limits across destinations
+
+`validate_post_media` returns every target's status, filename, actual size/type, allowed types, byte/count/duration limits, issues, warnings and user choices. It reuses the backend's `FILE_VALIDATION_RULES`; these are So-me Studio configured limits, not a freshly verified catalog of external platform API limits. For example, the current configuration allows a 150 MiB MP4 under Facebook VIDEO's size limit but rejects it for Instagram VIDEO (100 MiB). The plugin presents both outcomes before publishing anywhere. The user can choose destinations, provide another file, request conversion/compression, save a draft or cancel. Nothing is silently skipped or changed.
+
+The backend independently rejects known size/type/count incompatibilities before creating, updating, rescheduling, retrying or converting posts. Missing configured media rules also block that target instead of guessing. Drafts remain available for editing when conversion fails. Video duration is checked when provided to preflight; unknown duration and uninspected codecs/dimensions are explicitly marked for review. Library file records do not store measured duration. Content inspection and final platform/account acceptance are outside this check, so a basic pass is not a publication guarantee.
 
 ## Connection
 
