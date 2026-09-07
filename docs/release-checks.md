@@ -10,7 +10,7 @@ Use a dedicated workspace and an explicitly authorized test destination.
 
 1. An unauthenticated POST to `/mcp/posting` returns 401 and a `WWW-Authenticate` header containing `resource_metadata="https://api.so-me.studio/.well-known/oauth-protected-resource/mcp/posting"`.
 2. The metadata URL returns the posting resource and authorization server. Install/connect the plugin and complete OAuth in the browser. Verify that the Codex callback succeeds with a dynamically selected loopback port.
-3. `tools/list` returns exactly the 23 names in `MCP_POSTING_TOOLS`, including validate_post_media, media lookup and presigned uploads. Direct calls to `get_analytics_summary`, `reply_to_conversation`, `disconnect_account`, and an unknown tool return errors without charging credits or dispatching handlers.
+3. `tools/list` returns exactly the 30 names in `MCP_POSTING_TOOLS`, including validate_post_media, media lookup and presigned uploads. Direct calls to `get_analytics_summary`, `reply_to_conversation`, `disconnect_account`, and an unknown tool return errors without charging credits or dispatching handlers.
 4. List connected accounts. Save a text draft and verify that no publication is queued. Edit the draft and read it back.
 5. Schedule an authorized text post in the future; verify account, timezone, text, and queued status. Reschedule with `schedule_post`, confirm the new queue time, then cancel with `unschedule_post`.
 6. On an authorized test destination, publish a text post and read back its status. Do not call a merely queued post published. Convert a separate draft only when authorized; confirm the resulting post and removal of the draft.

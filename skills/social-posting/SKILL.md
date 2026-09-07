@@ -17,6 +17,12 @@ Social media studio is the plugin for So-me Studio. Use this plugin's So-me Stud
 
 Starter prompts may contain "Caption goes here" or refer to "this image/video" before a file is attached. Treat these as incomplete inputs: obtain the actual attachment and intended caption before publishing, unless the user explicitly wants that literal placeholder text.
 
+## Platform posting options
+
+Use the read-only destination tools before composing platform-specific `metaData`; never invent destination IDs or privacy options. For Pinterest, use `list_pinterest_boards` and pass the selected `boardId`. For Discord and Slack, use `list_discord_channels` or `list_slack_channels` and pass `discordChannelIds` or `slackChannelIds`. For Reddit, use `list_reddit_subreddits` and `list_reddit_flairs`; for Google Business, use `list_gmb_locations`. Preserve the user's selection and ask when several possible destinations remain ambiguous. This release selects existing destinations; it does not create boards or manage accounts.
+
+For TikTok, call `get_tiktok_creator_info` before publication. Explain the returned privacy choices and relevant creator limits; obtain the user's privacy selection and pass `privacy_level` with any requested comment/duet/stitch options in `metaData`. Do not guess or silently broaden visibility. A connected account can be for inbox use only: Telegram and WhatsApp are outside the scheduler's posting flow. Explain unsupported destinations instead of promising that every connected account can publish.
+
 ## Upload and attach images or videos
 
 1. For existing media, use `list_media`, `search_media`, or `list_media_folders` to select the user's intended files. For a new upload, obtain the actual source file, MIME type, and exact size in bytes. Do not guess file contents or treat a chat attachment URL as a local path.
@@ -56,6 +62,6 @@ The backend accepts at most 20 files per request; platform limits can be lower. 
 
 ## Release scope
 
-Version 1.2 supports text, image, and video posting and drafts, media uploads and library lookup, account lookup, calendar review, edits, rescheduling, cancellation, and requested deletion/retry. The server enforces a 23-tool allowlist. Do not switch to the full MCP endpoint to access a feature outside this release.
+Version 1.2 supports text, image, and video posting and drafts, media uploads and library lookup, account lookup, calendar review, edits, rescheduling, cancellation, and requested deletion/retry. The server enforces a 30-tool allowlist. Do not switch to the full MCP endpoint to access a feature outside this release.
 
 Analytics, inbox replies, team/billing settings, webhooks, and AI media generation are outside this release.

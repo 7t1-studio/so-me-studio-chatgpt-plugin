@@ -1,10 +1,11 @@
 # Social media studio plugin
 
-Version **1.2.2** supports social media text, image, and video posting. Social media studio connects to So-me Studio's hosted MCP backend and uses the logo supplied by 7t1 Studio.
+Version **1.2.3** supports social media text, image, and video posting. Social media studio connects to So-me Studio's hosted MCP backend and uses the logo supplied by 7t1 Studio.
 
 ## Included
 
 - Find connected social accounts.
+- Look up existing Pinterest boards, Discord/Slack channels, Reddit communities/flairs, Google Business locations, and TikTok creator options needed for posting.
 - Compare file sizes/types across destinations and decide how to handle incompatible media.
 - Upload images/videos or select existing library media.
 - Verify that uploads finished and match their declared type and size.
@@ -14,7 +15,7 @@ Version **1.2.2** supports social media text, image, and video posting. Social m
 - Review the posting calendar and publication status.
 - Edit, reschedule, cancel, delete, or retry posts when requested.
 
-The posting endpoint exposes 23 tools. Analytics, inbox, account administration, AI generation, bulk deletion, and other product features are excluded. Post types include TEXT, IMAGE, MULTIPLE_IMAGES, VIDEO, REEL, STORY, and CAROUSEL where the destination supports them. File format, duration, dimensions, and platform limits still apply.
+The posting endpoint exposes 30 tools. Analytics, inbox, account administration, AI generation, bulk deletion, and other product features are excluded. Post types include TEXT, IMAGE, MULTIPLE_IMAGES, VIDEO, REEL, STORY, and CAROUSEL where the destination supports them. File format, duration, dimensions, and platform limits still apply.
 
 ## Image and video upload flow
 
