@@ -31,9 +31,9 @@
     "websiteURL": "https://so-me.studio",
     "privacyPolicyURL": "https://so-me.studio/privacy-policy",
     "defaultPrompt": [
+      "Schedule this image for Facebook and Instagram tomorrow at 10 AM with this caption: \"Caption goes here\".",
       "Please post this video to all my connected social platforms.",
-      "Post this image to Facebook, LinkedIn, TikTok, and X with this caption: \"Caption goes here\".",
-      "Schedule this image for Facebook and Instagram tomorrow at 10 AM with this caption: \"Caption goes here\"."
+      "Post this image to Facebook, LinkedIn, TikTok, and X with this caption: \"Caption goes here\"."
     ],
     "brandColor": "#000000",
     "composerIcon": "./assets/icon.png",
