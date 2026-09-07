@@ -1,6 +1,6 @@
 # Social media studio plugin
 
-Version **1.2.1** supports social media text, image, and video posting. Social media studio connects to So-me Studio's hosted MCP backend and uses the logo supplied by 7t1 Studio.
+Version **1.2.2** supports social media text, image, and video posting. Social media studio connects to So-me Studio's hosted MCP backend and uses the logo supplied by 7t1 Studio.
 
 ## Included
 

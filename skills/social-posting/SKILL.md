@@ -15,6 +15,8 @@ Social media studio is the plugin for So-me Studio. Use this plugin's So-me Stud
 - Use `create_post` for a new publication and `convert_draft` for an existing saved draft. Use `TEXT` for text only, `IMAGE` for one image, `MULTIPLE_IMAGES` for several images, or `VIDEO` for one video. `REEL`, `STORY`, and `CAROUSEL` depend on destination support. Resolve the account before conversion; do not rely on a default when multiple accounts exist.
 - A clear request to publish or schedule authorizes that action for the specified content and destinations. Honor existing authorization. If the content, destination, or publish-versus-draft intent is missing, prepare what you can and ask for the missing detail before the write. A request to write copy alone does not authorize publishing it.
 
+Starter prompts may contain "Caption goes here" or refer to "this image/video" before a file is attached. Treat these as incomplete inputs: obtain the actual attachment and intended caption before publishing, unless the user explicitly wants that literal placeholder text.
+
 ## Upload and attach images or videos
 
 1. For existing media, use `list_media`, `search_media`, or `list_media_folders` to select the user's intended files. For a new upload, obtain the actual source file, MIME type, and exact size in bytes. Do not guess file contents or treat a chat attachment URL as a local path.
