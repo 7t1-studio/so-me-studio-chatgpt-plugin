@@ -1,28 +1,29 @@
 {
   "name": "so-me-studio",
-  "version": "1.0.0",
-  "description": "Draft, publish, and schedule social media text posts with So-me Studio.",
+  "version": "1.1.0",
+  "description": "Upload images and videos, then draft, publish, and schedule social posts with So-me Studio.",
   "author": {
     "name": "7t1 Studio / So-me Studio",
     "email": "support@so-me.studio",
     "url": "https://so-me.studio"
   },
   "homepage": "https://docs.so-me.studio/mcp/overview",
+  "repository": "https://github.com/7t1-studio/so-me-studio-chatgpt-plugin",
   "license": "MIT",
   "keywords": ["social-media", "posting", "scheduling", "drafts", "so-me-studio"],
   "skills": "./skills/",
   "interface": {
     "displayName": "So-me Studio",
     "shortDescription": "Draft, publish, and schedule social posts.",
-    "longDescription": "Connect your So-me Studio workspace to draft, publish, and schedule text posts for your connected social accounts. Review your calendar, edit upcoming posts, and check publication status. Version 1 focuses on posting; media attachments and other product features are reserved for future releases. Requires a workspace with API/MCP access and connected social accounts.",
+    "longDescription": "Upload images and videos or choose existing library media, then draft, publish, and schedule posts for your connected social accounts. Review your calendar, edit upcoming posts, and check publication status. Includes upload verification and media drafts. Requires API/MCP access and connected accounts; supported formats and post types depend on the destination platform. Local uploads require access to the source file and an HTTP upload capability.",
     "developerName": "7t1 Studio",
     "category": "Productivity",
     "capabilities": ["Read", "Write"],
     "websiteURL": "https://so-me.studio",
     "privacyPolicyURL": "https://so-me.studio/privacy-policy",
     "defaultPrompt": [
-      "Save a LinkedIn text draft in So-me Studio.",
-      "Schedule a text post with So-me Studio.",
+      "Upload this image and schedule it in So-me Studio.",
+      "Save this video as a draft in So-me Studio.",
       "Show my upcoming posts in So-me Studio."
     ],
     "brandColor": "#0F766E",
