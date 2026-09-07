@@ -26,6 +26,7 @@ Testing is authorized against the owner's connected test accounts. Successful te
 - [x] Missing/invalid files, mismatched post type, unsupported types/sizes, and blocked publication.
 - [x] Draft creation/read/edit and media-preserving conversion.
 - [x] Future scheduling, rescheduling, cancellation, and calendar state.
+- [x] Clear attachments while switching a future image post to TEXT, then cancel it; readback confirms no attachments, PENDING, and no scheduled time.
 - [x] Image and video publication confirmed after queue processing (platform outcomes below).
 - [x] Published attachment/caption inspected on Threads, YouTube, and Pinterest video.
 - [ ] ChatGPT client connection and media workflow.
@@ -75,5 +76,9 @@ Validation: backend type-check passed, all 398 MCP tests passed (17 suites), and
 Deployment evidence: [proxy recovery](https://github.com/7t1-studio/schedular-app/actions/runs/34158595718), [posting repairs deployed](https://github.com/7t1-studio/schedular-app/actions/runs/34160244040), and [final draft normalization deployed](https://github.com/7t1-studio/schedular-app/actions/runs/34160750105), all successful. Live creation, update, and readback with account UUIDs succeeded after the final deployment; the platform account ID was stored correctly and the image attachment remained intact. Final backend source commit: `e7dde2602421f3e9b649840e78687aa942da0b51`.
 
 ## Remaining acceptance boundaries
+
+The [final repository Checks workflow](https://github.com/7t1-studio/schedular-app/actions/runs/34160750189) passed: 1,214 backend unit tests in 86 suites, backend end-to-end tests, and frontend/website/demo lint. These use the repository's existing CI exclusions; they do not establish that every unrelated application feature has been tested.
+
+The [final read-only server inspection](https://github.com/7t1-studio/schedular-app/actions/runs/34161569594) found the application containers healthy, zero backend/frontend/proxy restarts, no OOM flags, valid nginx configuration, and HTTP 200 from API health, app login, and the marketing site. Proxy memory was 174.5 MiB of 512 MiB; backend memory was 234.7 MiB of 768 MiB.
 
 Backend MCP calls and browser OAuth were tested against production. The installed plugin still needs a fresh Codex task to load its tools. ChatGPT remains logged out in the available browser, so ChatGPT connection, its actual attachment-transfer capabilities, and starter-prompt behavior remain unverified. Do not describe the package as submission-ready until those client checks pass. Refreshing expired social credentials requires the account owner's sign-in flow. This report does not claim every file/post type on every platform was tested.
