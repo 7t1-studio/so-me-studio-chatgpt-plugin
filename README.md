@@ -1,6 +1,6 @@
-# So-me Studio plugin
+# Social media studio plugin
 
-Version **1.2.0** supports social media text, image, and video posting. This separate plugin repository reuses So-me Studio's hosted MCP backend and branding from the Claude connector.
+Version **1.2.1** supports social media text, image, and video posting. Social media studio connects to So-me Studio's hosted MCP backend and uses the logo supplied by 7t1 Studio.
 
 ## Included
 
@@ -60,7 +60,7 @@ See [release checks](docs/release-checks.md) for validation and the live accepta
 
 ## Files and future releases
 
-`.codex-plugin/plugin.json` holds listing metadata. `.mcp.json` configures the connection. `skills/social-posting/SKILL.md` teaches the posting workflow. `assets/icon.svg` and `LICENSE` are reused from the MIT-licensed Claude connector.
+`.codex-plugin/plugin.json` holds listing metadata. `.mcp.json` configures the connection. `skills/social-posting/SKILL.md` teaches the posting workflow. `assets/icon.png` is the supplied plugin logo and composer icon. The original `LICENSE` is retained from the MIT-licensed Claude connector.
 
 For future features, explicitly extend the backend posting profile or introduce another profile, update the skill and listing, and bump the plugin version. New backend tools do not automatically enter the posting allowlist.
 

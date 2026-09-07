@@ -1,11 +1,11 @@
 ---
 name: social-posting
-description: Upload images and videos, draft, publish, schedule, and manage social posts in So-me Studio. Use for its connected accounts, media library, saved drafts, and posting calendar. Does not cover analytics, inbox, account administration, or AI media generation.
+description: Upload images and videos, draft, publish, schedule, and manage social posts with Social media studio, powered by So-me Studio. Use for its connected accounts, media library, saved drafts, and posting calendar. Does not cover analytics, inbox, account administration, or AI media generation.
 ---
 
-# So-me Studio posting
+# Social media studio posting
 
-Use this plugin's So-me Studio MCP tools. Discover the available tools and their live schemas before calling them. The plugin connects to `https://api.so-me.studio/mcp/posting` using OAuth. If authentication or API/MCP access is missing, direct the user to connect the plugin or enable access in their So-me Studio workspace. Do not request passwords or tokens in chat.
+Social media studio is the plugin for So-me Studio. Use this plugin's So-me Studio MCP tools. Discover the available tools and their live schemas before calling them. The plugin connects to `https://api.so-me.studio/mcp/posting` using OAuth. If authentication or API/MCP access is missing, direct the user to connect the plugin or enable access in their So-me Studio workspace. Do not request passwords or tokens in chat.
 
 ## Choose the destination and action
 

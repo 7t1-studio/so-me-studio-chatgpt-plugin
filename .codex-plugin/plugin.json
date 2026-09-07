@@ -1,7 +1,7 @@
 {
   "name": "so-me-studio",
-  "version": "1.2.0",
-  "description": "Upload images and videos, then draft, publish, and schedule social posts with So-me Studio.",
+  "version": "1.2.1",
+  "description": "Upload images and videos, then draft, publish, and schedule posts with Social media studio, powered by so-me.studio.",
   "author": {
     "name": "7t1 Studio / So-me Studio",
     "email": "support@so-me.studio",
@@ -19,7 +19,7 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "So-me Studio",
+    "displayName": "Social media studio",
     "shortDescription": "Draft, publish, and schedule social posts.",
     "longDescription": "Upload images and videos or choose existing library media, then draft, publish, and schedule posts for your connected social accounts. Review your calendar, edit upcoming posts, and check publication status. Includes upload verification and media drafts. Requires API/MCP access and connected accounts; supported formats and post types depend on the destination platform. Local uploads require access to the source file and an HTTP upload capability. Compare file compatibility across destinations before uploading or publishing, with clear limits, rejection reasons, and user choices.",
     "developerName": "7t1 Studio",
@@ -31,13 +31,13 @@
     "websiteURL": "https://so-me.studio",
     "privacyPolicyURL": "https://so-me.studio/privacy-policy",
     "defaultPrompt": [
-      "Upload this image and schedule it in So-me Studio.",
-      "Save this video as a draft in So-me Studio.",
-      "Show my upcoming posts in So-me Studio."
+      "Upload this image and schedule it in Social media studio.",
+      "Save this video as a draft in Social media studio.",
+      "Show my upcoming posts in Social media studio."
     ],
-    "brandColor": "#0F766E",
-    "composerIcon": "./assets/icon.svg",
-    "logo": "./assets/icon.svg"
+    "brandColor": "#000000",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png"
   },
   "mcpServers": "./.mcp.json"
 }
