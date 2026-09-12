@@ -1,12 +1,15 @@
 # Social media studio plugin
 
-Version **1.2.3** supports social media text, image, and video posting. Social media studio connects to So-me Studio's hosted MCP backend and uses the logo supplied by 7t1 Studio.
+Version **1.3.0** supports social media text, image, and video posting, thread chains, an automatic first comment, and typed TikTok options. Social media studio connects to So-me Studio's hosted MCP backend and uses the logo supplied by 7t1 Studio.
 
 ## Included
 
 - Find connected social accounts.
 - Look up existing Pinterest boards, Discord/Slack channels, Reddit communities/flairs, Google Business locations, and TikTok creator options needed for posting.
-- Compare file sizes/types across destinations and decide how to handle incompatible media.
+- Compare file sizes, types, pixel size, aspect ratio, codec, and frame rate across destinations and decide how to handle incompatible media.
+- Publish a multi-post chain on X, Threads, Bluesky, or Mastodon.
+- Add an automatic first comment for hashtags or a link on the platforms that support one.
+- Collect the TikTok privacy level and interaction options from the creator before publication.
 - Upload images/videos or select existing library media.
 - Verify that uploads finished and match their declared type and size.
 - Save and edit text, image, and video drafts.
@@ -15,7 +18,7 @@ Version **1.2.3** supports social media text, image, and video posting. Social m
 - Review the posting calendar and publication status.
 - Edit, reschedule, cancel, delete, or retry posts when requested.
 
-The posting endpoint exposes 30 tools. Analytics, inbox, account administration, AI generation, bulk deletion, and other product features are excluded. Post types include TEXT, IMAGE, MULTIPLE_IMAGES, VIDEO, REEL, STORY, and CAROUSEL where the destination supports them. File format, duration, dimensions, and platform limits still apply.
+The posting endpoint exposes 31 tools. Analytics, inbox, account administration, AI generation, bulk deletion, and other product features are excluded. Post types include TEXT, IMAGE, MULTIPLE_IMAGES, VIDEO, REEL, STORY, and CAROUSEL where the destination supports them. File format, duration, dimensions, and platform limits still apply.
 
 ## Image and video upload flow
 
@@ -28,9 +31,21 @@ The backend checks ownership and completed uploads before attaching media. Each 
 
 Direct local upload requires access to the source file and an HTTP upload capability (the bundled helper requires Python 3). Clients that cannot transfer bytes can use media already uploaded through the So-me Studio app. Presigned URLs alone do not upload anything. This is upload support for your own files, not AI image/video generation.
 
+## Thread chains, first comment, and TikTok options
+
+`create_post`, `update_post`, `schedule_post`, `create_draft`, and `update_draft` take three new top-level fields.
+
+`threadParts` is the ordered list of posts that follow the head post, which stays in `text`. A three-post chain is `text` plus two thread parts. Each part is `{ text, fileIds }` or a plain string. Chains work on X (280 characters, 4 media per part), Threads (500, 20), Bluesky (300 graphemes, 4), and Mastodon (500, 4), at most 24 parts each. Every other destination rejects the field. Publishing past the head is best effort: a failed part leaves the head live and the post carries a warning naming how many parts published.
+
+`firstComment` is one comment posted automatically under the post right after it publishes, usually hashtags or a link. Limits are Facebook 8000, Instagram 2200, X 280, LinkedIn and LinkedIn Page 1250, Threads 500, YouTube 10000 characters. An unsupported destination is not rejected: the post publishes there without the comment and the response carries a `FIRST_COMMENT_UNSUPPORTED` warning. `list_accounts` and `get_account` return `capabilities.firstComment`, `capabilities.firstCommentMaxLength`, `capabilities.threads`, and `capabilities.threadPartMaxLength` per account, so the plugin reads support from the server. On a chain the comment goes under the last part.
+
+`tiktok` carries `privacyLevel`, `allowComments`, `allowDuet`, and `allowStitch`. TikTok rejects a post that has no privacy level, and only the creator may choose one, so the plugin calls `get_tiktok_creator_info`, offers only the returned `privacy_level_options`, recommends `PUBLIC_TO_EVERYONE`, and asks whether comments are allowed. A TikTok post without `tiktok.privacyLevel` is rejected with `TIKTOK_PRIVACY_LEVEL_REQUIRED` and the payload lists the allowed options. Settings the creator disabled account-wide are forced off and reported as `TIKTOK_SETTING_FORCED` warnings.
+
 ## Different limits across destinations
 
 `validate_post_media` returns every target's status, filename, actual size/type, allowed types, byte/count/duration limits, issues, warnings and user choices. It reuses the backend's `FILE_VALIDATION_RULES`; these are So-me Studio configured limits, not a freshly verified catalog of external platform API limits. For example, the current configuration allows a 150 MiB MP4 under Facebook VIDEO's size limit but rejects it for Instagram VIDEO (100 MiB). The plugin presents both outcomes before publishing anywhere. The user can choose destinations, provide another file, request conversion/compression, save a draft or cancel. Nothing is silently skipped or changed.
+
+`validate_post_media` also measures each library file from its own bytes and compares the measured width, height, duration, video codec, and frame rate against each destination's rules. Mismatches return `DIMENSIONS_INVALID`, `ASPECT_RATIO_INVALID`, `CODEC_UNSUPPORTED`, or `FRAME_RATE_INVALID`, each with `measured`, `required`, and a `fix` string naming the exact change, such as the crop dimensions for an aspect-ratio failure. The plugin calls the check before `create_post` whenever it generated or edited the media, applies the fix, and revalidates. `get_media_rules` returns the whole per-platform rules table, which is useful for generating media at the right size in the first place.
 
 The backend independently rejects known size/type/count incompatibilities before creating, updating, rescheduling, retrying or converting posts. Missing configured media rules also block that target instead of guessing. Drafts remain available for editing when conversion fails. Video duration is checked when provided to preflight; unknown duration and uninspected codecs/dimensions are explicitly marked for review. Library file records do not store measured duration. Content inspection and final platform/account acceptance are outside this check, so a basic pass is not a publication guarantee.
 
