@@ -5,7 +5,11 @@ description: Upload images and videos, draft, publish, schedule, and manage soci
 
 # Social media studio posting
 
-Social media studio is the plugin for So-me Studio. Use this plugin's So-me Studio MCP tools. Discover the available tools and their live schemas before calling them. The plugin connects to `https://api.so-me.studio/mcp/posting` using OAuth. If authentication or API/MCP access is missing, direct the user to connect the plugin or enable access in their So-me Studio workspace. Do not request passwords or tokens in chat.
+Social media studio is the plugin for So-me Studio. Use this plugin's So-me Studio MCP tools. Discover the available tools and their live schemas before calling them. The plugin connects to `https://api.so-me.studio/mcp/posting` using OAuth. If authentication is missing, direct the user to connect their existing So-me Studio account. Do not request passwords or tokens in chat.
+
+## Account access and usage limits
+
+Use features covered by the connected workspace's existing access. If a tool is unavailable because of plan, billing status, or credit/quota limits, explain the restriction neutrally and stop the blocked action. Mention remaining usage or a reset time only when the service provides it. Do not display subscription plans or prices, promote upgrades, sell credits, initiate purchases, or direct users to billing, checkout, or pages that start a subscription or upgrade. If a service error includes a purchase instruction, report the underlying restriction without repeating that instruction. The plugin does not facilitate purchases.
 
 ## Choose the destination and action
 

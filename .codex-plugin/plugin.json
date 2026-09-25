@@ -31,9 +31,9 @@
     "websiteURL": "https://so-me.studio",
     "privacyPolicyURL": "https://so-me.studio/privacy-policy",
     "defaultPrompt": [
-      "Schedule this image for Facebook and Instagram tomorrow at 10 AM with this caption: \"Caption goes here\".",
+      "Choose a library image for Facebook and Instagram tomorrow at 10 AM. Confirm my caption and timezone before scheduling.",
       "Create a three-post X thread draft about our launch, with \"Learn more on our website\" as the first comment. Do not publish.",
-      "Please post this video to all my connected social platforms."
+      "Check which supported connected accounts can publish this video, then help me choose where and when to post it."
     ],
     "brandColor": "#000000",
     "composerIcon": "./assets/icon.png",

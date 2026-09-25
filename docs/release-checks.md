@@ -41,6 +41,12 @@ Use a dedicated workspace and an explicitly authorized test destination.
 25. On a creator who disabled comments, confirm the option is forced off and the result carries a `TIKTOK_SETTING_FORCED` warning the plugin repeats. Confirm `convert_draft` validates a draft saved without a privacy level and accepts a `tiktok` object of its own.
 26. Validate a 2560x1080 image for Instagram IMAGE. Confirm `ASPECT_RATIO_INVALID` with `measured`, `required`, `fix` and `suggestedDimensions`. Crop to a suggested size, revalidate and confirm it passes. Repeat for `DIMENSIONS_INVALID`, `CODEC_UNSUPPORTED` and `FRAME_RATE_INVALID`. Confirm `get_media_rules` returns the per-platform table and that the plugin reads it before generating media.
 
+## Commerce checks
+
+- Check missing access entitlement, plan without API access, exhausted API quota, and unavailable/exhausted MCP credits. Each must continue denying the action while explaining the restriction without upgrade, purchase, or checkout directions. Verify the HTTP authentication error and tool error responses, not just successful calls.
+- Confirm the posting catalog contains no pricing, plan-sales, billing, or checkout tools. The OAuth flow should connect an existing account; the skill should not turn an access error into a purchase recommendation.
+- Deploy the backend message changes and upload the rebuilt skill ZIP before relying on the no-purchase declaration in the ChatGPT submission. Local checks alone do not verify production error responses.
+
 ## Release boundaries
 
 Local tests do not prove that production is deployed, OAuth has completed, or a social platform accepted a post. Record those checks separately before public distribution. The package contains no runtime proxy, dependency installer, or credentials. Public-directory submission and deployment are separate release actions.
