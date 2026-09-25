@@ -1,7 +1,7 @@
 {
   "name": "so-me-studio",
   "version": "1.3.0",
-  "description": "Upload images and videos, then draft, publish, and schedule posts with Social media studio, powered by so-me.studio.",
+  "description": "Draft, publish, and schedule social posts with images, videos, thread chains, and automatic first comments on supported platforms.",
   "author": {
     "name": "7t1 Studio / So-me Studio",
     "email": "support@so-me.studio",
@@ -20,8 +20,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Social media studio",
-    "shortDescription": "Draft, publish, and schedule social posts.",
-    "longDescription": "Upload images and videos or choose existing library media, then draft, publish, and schedule posts for your connected social accounts. Review your calendar, edit upcoming posts, and check publication status. Includes upload verification and media drafts. Requires API/MCP access and connected accounts; supported formats and post types depend on the destination platform. Local uploads require access to the source file and an HTTP upload capability. Compare file compatibility across destinations before uploading or publishing, with clear limits, rejection reasons, and user choices, including pixel size, aspect ratio, codec, and frame rate. Publish a multi-post chain on X, Threads, Bluesky, or Mastodon, add an automatic first comment on the platforms that support one, and collect the TikTok privacy level from the creator before publication.",
+    "shortDescription": "Publish and schedule posts",
+    "longDescription": "Upload images and videos or choose existing library media, then draft, publish, and schedule posts for your connected social accounts. Review your calendar, edit upcoming posts, and check publication status. Includes upload verification and media drafts. Requires API/MCP access and connected accounts; supported formats and post types depend on the destination platform. Local uploads require access to the source file and an HTTP upload capability. Compare file compatibility across destinations before uploading or publishing, with clear limits, rejection reasons, and user choices, including pixel size, aspect ratio, codec, and frame rate. Publish a multi-post chain on X, Threads, Bluesky, or Mastodon, add an automatic first comment on the platforms that support one, and collect the TikTok privacy level from the creator before publication. Reddit and Google Business Profile are not supported in this release.",
     "developerName": "7t1 Studio",
     "category": "Productivity",
     "capabilities": [
@@ -32,8 +32,8 @@
     "privacyPolicyURL": "https://so-me.studio/privacy-policy",
     "defaultPrompt": [
       "Schedule this image for Facebook and Instagram tomorrow at 10 AM with this caption: \"Caption goes here\".",
-      "Please post this video to all my connected social platforms.",
-      "Post this image to Facebook, LinkedIn, TikTok, and X with this caption: \"Caption goes here\"."
+      "Create a three-post X thread draft about our launch, with \"Learn more on our website\" as the first comment. Do not publish.",
+      "Please post this video to all my connected social platforms."
     ],
     "brandColor": "#000000",
     "composerIcon": "./assets/icon.png",

@@ -5,7 +5,7 @@ Version **1.3.0** supports social media text, image, and video posting, thread c
 ## Included
 
 - Find connected social accounts.
-- Look up existing Pinterest boards, Discord/Slack channels, Reddit communities/flairs, Google Business locations, and TikTok creator options needed for posting.
+- Look up existing Pinterest boards, Discord/Slack channels, and TikTok creator options needed for posting.
 - Compare file sizes, types, pixel size, aspect ratio, codec, and frame rate across destinations and decide how to handle incompatible media.
 - Publish a multi-post chain on X, Threads, Bluesky, or Mastodon.
 - Add an automatic first comment for hashtags or a link on the platforms that support one.
@@ -18,7 +18,7 @@ Version **1.3.0** supports social media text, image, and video posting, thread c
 - Review the posting calendar and publication status.
 - Edit, reschedule, cancel, delete, or retry posts when requested.
 
-The posting endpoint exposes 31 tools. Analytics, inbox, account administration, AI generation, bulk deletion, and other product features are excluded. Post types include TEXT, IMAGE, MULTIPLE_IMAGES, VIDEO, REEL, STORY, and CAROUSEL where the destination supports them. File format, duration, dimensions, and platform limits still apply.
+The posting endpoint exposes 28 tools. Reddit and Google Business Profile are not supported in this connector release. Analytics, inbox, account administration, AI generation, bulk deletion, and other product features are excluded. Post types include TEXT, IMAGE, MULTIPLE_IMAGES, VIDEO, REEL, STORY, and CAROUSEL where the destination supports them. File format, duration, dimensions, and platform limits still apply.
 
 ## Image and video upload flow
 
