@@ -1,6 +1,6 @@
 {
   "name": "so-me-studio",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Draft, publish, and schedule social posts with images, videos, thread chains, and automatic first comments on supported platforms.",
   "author": {
     "name": "7t1 Studio / So-me Studio",
@@ -21,15 +21,17 @@
   "interface": {
     "displayName": "Social media studio",
     "shortDescription": "Publish and schedule posts",
-    "longDescription": "Upload images and videos or choose existing library media, then draft, publish, and schedule posts for your connected social accounts. Review your calendar, edit upcoming posts, and check publication status. Includes upload verification and media drafts. Requires API/MCP access and connected accounts; supported formats and post types depend on the destination platform. Local uploads require access to the source file and an HTTP upload capability. Compare file compatibility across destinations before uploading or publishing, with clear limits, rejection reasons, and user choices, including pixel size, aspect ratio, codec, and frame rate. Publish a multi-post chain on X, Threads, Bluesky, or Mastodon, add an automatic first comment on the platforms that support one, and collect the TikTok privacy level from the creator before publication. Reddit and Google Business Profile are not supported in this release.",
-    "developerName": "7t1 Studio",
+    "longDescription": "Draft, publish, and schedule social media posts from ChatGPT using your connected So-me Studio accounts. Create multi-post threads on X, Threads, Bluesky, and Mastodon, and add an automatic first comment on supported platforms. Choose images and videos from your media library, check platform compatibility before you upload, review your posting calendar, edit upcoming posts, and track publication status. For social media managers, creators, and small businesses that already use So-me Studio. Requires a So-me Studio account with API/MCP access and connected social accounts. Media, thread, and first-comment support depends on the destination platform. Reddit and Google Business Profile are not supported in this release. The plugin does not provide analytics, inbox replies, billing, or AI image and video generation.",
+    "developerName": "Social media studio",
     "category": "Productivity",
     "capabilities": [
       "Read",
       "Write"
     ],
     "websiteURL": "https://so-me.studio",
+    "supportURL": "https://so-me.studio/contact-us",
     "privacyPolicyURL": "https://so-me.studio/privacy-policy",
+    "termsOfServiceURL": "https://so-me.studio/terms-and-conditions",
     "defaultPrompt": [
       "Choose a library image for Facebook and Instagram tomorrow at 10 AM. Confirm my caption and timezone before scheduling.",
       "Create a three-post X thread draft about our launch, with \"Learn more on our website\" as the first comment. Do not publish.",
@@ -39,5 +41,65 @@
     "composerIcon": "./assets/icon.png",
     "logo": "./assets/icon.png"
   },
-  "mcpServers": "./.mcp.json"
+  "mcpServers": "./.mcp.json",
+  "extensions": {
+    "com.openai": {
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "List the connected destinations",
+              "prompt": "Which social accounts are connected to my Social media studio workspace?",
+              "tools_triggered": "list_accounts",
+              "expected_behavior": "Lists the 12 connected accounts of the test workspace by platform and name, for example Instagram @somestudio2025, X @hisomestudio, Bluesky hisomestudio.bsky.social and Mastodon somestudio. Nothing is created or published."
+            },
+            {
+              "description": "Save an X thread with a first comment as a draft",
+              "prompt": "Draft a three-post X thread about planning a week of social posts, with \"Learn more at so-me.studio\" as the first comment. Save it as a draft and do not publish it.",
+              "tools_triggered": "list_accounts, create_draft",
+              "expected_behavior": "Saves one draft for the X account with the head post in text, two threadParts and the first comment, and returns the draft ID. No post is published or scheduled."
+            },
+            {
+              "description": "Publish a text post now",
+              "prompt": "Publish \"Testing Social media studio from ChatGPT\" to my Bluesky account now.",
+              "tools_triggered": "list_accounts, create_post, get_post",
+              "expected_behavior": "ChatGPT asks the reviewer to allow the write action. After approval, the plugin selects the Bluesky account hisomestudio.bsky.social, publishes the text once without scheduledAt, and reports the result with a link to the live post. It does not publish to any other account."
+            },
+            {
+              "description": "Schedule a post, check the calendar, then cancel it",
+              "prompt": "Schedule \"Our weekly tips thread is coming soon\" on Mastodon for next Monday at 10:00 AM UTC. Then show my calendar for next week and cancel that scheduled post.",
+              "tools_triggered": "list_accounts, create_post, get_calendar_posts, unschedule_post",
+              "expected_behavior": "ChatGPT asks the reviewer to allow the scheduled post. The plugin creates one Mastodon post scheduled for next Monday 10:00 UTC, shows the calendar for that week, then removes the post from the publishing queue with unschedule_post. Nothing is published."
+            },
+            {
+              "description": "Check video compatibility before an upload",
+              "prompt": "Before I upload it, check if my 320 MB MP4 video (1080x1920, 45 seconds, H.264, 30 fps) can be posted as a video on Facebook and Instagram.",
+              "tools_triggered": "validate_post_media",
+              "expected_behavior": "Returns one result per destination with the configured limits. Facebook passes the basic checks (350 MiB limit). Instagram is incompatible because the file is over its 300 MiB video limit. Nothing is uploaded or published, and the assistant suggests a smaller copy for Instagram."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Analytics and inbox replies are out of scope. The plugin has no analytics, comment or inbox tools, so the assistant explains that it can only draft, publish and schedule posts, and it does not call create_post or any other write tool.",
+              "prompt": "Show the analytics for my last Instagram post and reply to its newest comments."
+            },
+            {
+              "description": "Reddit and Google Business Profile are not supported in this release. The assistant explains this and does not call create_post or schedule_post for those destinations.",
+              "prompt": "Post our launch announcement to Reddit and to our Google Business Profile."
+            },
+            {
+              "description": "The plugin has no billing or purchase tools. The assistant does not change the plan, buy account slots, show prices or give checkout links, and it states that it made no changes or purchases.",
+              "prompt": "Upgrade my Social media studio plan and buy five extra social account slots."
+            }
+          ]
+        },
+        "demo_recording_url": "https://cdn.so-me.studio/review/openai/social-media-studio-chatgpt-demo-1.3.1.mp4",
+        "commerce": false,
+        "commerce_description": "The plugin does not sell products, show prices, or process payments."
+      },
+      "publication": {
+        "release_notes": "Version 1.3.1 has a clearer description, support and terms links, and updated review materials. Drafting, publishing, scheduling, media checks and the social-posting skill work as in 1.3.0."
+      }
+    }
+  }
 }
