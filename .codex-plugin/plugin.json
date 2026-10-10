@@ -12,6 +12,8 @@
   "license": "MIT",
   "keywords": [
     "social-media",
+    "productivity",
+    "content-calendar",
     "posting",
     "scheduling",
     "drafts",
@@ -21,7 +23,7 @@
   "interface": {
     "displayName": "Social media studio",
     "shortDescription": "Publish and schedule posts",
-    "longDescription": "Draft, publish, and schedule social media posts from ChatGPT using your connected So-me Studio accounts. Create multi-post threads on X, Threads, Bluesky, and Mastodon, and add an automatic first comment on supported platforms. Choose images and videos from your media library, check platform compatibility before you upload, review your posting calendar, edit upcoming posts, and track publication status. For social media managers, creators, and small businesses that already use So-me Studio. Requires a So-me Studio account with API/MCP access and connected social accounts. Media, thread, and first-comment support depends on the destination platform. Reddit and Google Business Profile are not supported in this release. The plugin does not provide analytics, inbox replies, billing, or AI image and video generation.",
+    "longDescription": "Social media studio is a productivity tool for social media work. Plan, schedule, and publish a week of posts to all your connected So-me Studio accounts from one ChatGPT conversation, without switching between social apps. Create multi-post threads on X, Threads, Bluesky, and Mastodon, and add an automatic first comment on supported platforms. Choose images and videos from your media library, check platform compatibility before you upload, review your posting calendar, edit upcoming posts, and track publication status. For social media managers, creators, and small businesses that already use So-me Studio. Requires a So-me Studio account with API/MCP access and connected social accounts. Media, thread, and first-comment support depends on the destination platform. Reddit and Google Business Profile are not supported in this release. The plugin does not provide analytics, inbox replies, billing, or AI image and video generation.",
     "developerName": "Social media studio",
     "category": "Productivity",
     "capabilities": [
