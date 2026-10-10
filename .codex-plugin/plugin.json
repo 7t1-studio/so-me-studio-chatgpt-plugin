@@ -48,52 +48,52 @@
         "test_cases": {
           "positive": [
             {
-              "description": "List the connected destinations",
-              "prompt": "Which social accounts are connected to my Social media studio workspace?",
-              "tools_triggered": "list_accounts",
-              "expected_behavior": "Lists the 12 connected accounts of the test workspace by platform and name, for example Instagram @somestudio2025, X @hisomestudio, Bluesky hisomestudio.bsky.social and Mastodon somestudio. Nothing is created or published."
+              "description": "Publish an image from the media library to Bluesky now",
+              "prompt": "Find calendar__c00-month.webp in my Social media studio media library and publish it to my Bluesky account now with the caption \"Plan a whole month of posts in one calendar.\" Then send me the link to the live post.",
+              "tools_triggered": "list_accounts, search_media, validate_post_media, get_media_file, create_post, get_post",
+              "expected_behavior": "The plugin finds calendar__c00-month.webp in the media library and checks it against the Bluesky image rules. ChatGPT asks the reviewer to allow the write action. After approval, it publishes one image post with the exact caption to hisomestudio.bsky.social, reports the status Published and gives a link to the live post. It publishes to no other account."
             },
             {
-              "description": "Save an X thread with a first comment as a draft",
-              "prompt": "Draft a three-post X thread about planning a week of social posts, with \"Learn more at so-me.studio\" as the first comment. Save it as a draft and do not publish it.",
-              "tools_triggered": "list_accounts, create_draft",
-              "expected_behavior": "Saves one draft for the X account with the head post in text, two threadParts and the first comment, and returns the draft ID. No post is published or scheduled."
+              "description": "Schedule one post on Mastodon and a LinkedIn page, then show next week's calendar",
+              "prompt": "Schedule this post on my Mastodon account and my LinkedIn page for next Monday at 9:00 AM UTC: \"New on our blog: 5 ways to plan a week of social posts in 30 minutes.\" Then show me my posting calendar for next week.",
+              "tools_triggered": "list_accounts, create_post, get_calendar_posts",
+              "expected_behavior": "ChatGPT asks the reviewer to allow the scheduled post. The plugin creates two text posts with the same text, one for Mastodon @somestudio and one for the LinkedIn page so-me-0047, both scheduled for next Monday at 09:00 UTC. It then shows next week's calendar with both posts on Monday. Nothing is published now."
             },
             {
-              "description": "Publish a text post now",
-              "prompt": "Publish \"Testing Social media studio from ChatGPT\" to my Bluesky account now.",
-              "tools_triggered": "list_accounts, create_post, get_post",
-              "expected_behavior": "ChatGPT asks the reviewer to allow the write action. After approval, the plugin selects the Bluesky account hisomestudio.bsky.social, publishes the text once without scheduledAt, and reports the result with a link to the live post. It does not publish to any other account."
+              "description": "Move, edit and unschedule upcoming posts (run after test case 2)",
+              "prompt": "In my posting calendar for next week, move the Mastodon post to Tuesday at 3:00 PM UTC and add #SocialMediaTips to the end of its text. Then take the LinkedIn post off the schedule.",
+              "tools_triggered": "get_calendar_posts, update_post, unschedule_post",
+              "expected_behavior": "The plugin finds the two posts from test case 2 on next week's calendar. ChatGPT asks the reviewer to allow the update. The Mastodon post moves to next Tuesday at 15:00 UTC, its text ends with #SocialMediaTips, and it stays scheduled. The LinkedIn post is taken off the schedule and changes to Pending. It is not deleted and not published."
             },
             {
-              "description": "Schedule a post, check the calendar, then cancel it",
-              "prompt": "Schedule \"Our weekly tips thread is coming soon\" on Mastodon for next Monday at 10:00 AM UTC. Then show my calendar for next week and cancel that scheduled post.",
-              "tools_triggered": "list_accounts, create_post, get_calendar_posts, unschedule_post",
-              "expected_behavior": "ChatGPT asks the reviewer to allow the scheduled post. The plugin creates one Mastodon post scheduled for next Monday 10:00 UTC, shows the calendar for that week, then removes the post from the publishing queue with unschedule_post. Nothing is published."
+              "description": "Save an X thread with an automatic first comment as a draft",
+              "prompt": "Write a three-post X thread with practical tips for batching a week of social posts. Add \"Plan your week at so-me.studio\" as an automatic first comment, and save it as a draft in Social media studio. Do not publish or schedule it.",
+              "tools_triggered": "create_draft",
+              "expected_behavior": "ChatGPT writes the thread and saves one draft for the X account @hisomestudio: the head post as the text, two thread parts of 280 characters or less, and the first comment \"Plan your week at so-me.studio\". It shows the saved draft. No post is published or scheduled."
             },
             {
-              "description": "Check video compatibility before an upload",
-              "prompt": "Before I upload it, check if my 320 MB MP4 video (1080x1920, 45 seconds, H.264, 30 fps) can be posted as a video on Facebook and Instagram.",
+              "description": "Check a video against four platforms before an upload",
+              "prompt": "Before I upload it, check if my video spring-launch.mp4 can be posted as an Instagram Reel, a TikTok video, a Facebook Reel and a Bluesky video. It is an MP4, 1080x1920, 2 minutes long, 120 MB, H.264, 30 fps. Tell me what to change for each platform that fails.",
               "tools_triggered": "validate_post_media",
-              "expected_behavior": "Returns one result per destination with the configured limits. Facebook passes the basic checks (350 MiB limit). Instagram is incompatible because the file is over its 300 MiB video limit. Nothing is uploaded or published, and the assistant suggests a smaller copy for Instagram."
+              "expected_behavior": "A read-only check: nothing is uploaded or published. Instagram Reel and TikTok video pass the basic checks. Facebook Reel fails because 120 seconds is more than the 90-second limit; the fix is to trim the video to 90 seconds or less. Bluesky video fails because 120 MB (114.4 MiB) is more than the 100 MiB limit; the fix is to compress it to less than 100 MiB."
             }
           ],
           "negative": [
             {
-              "description": "Analytics and inbox replies are out of scope. The plugin has no analytics, comment or inbox tools, so the assistant explains that it can only draft, publish and schedule posts, and it does not call create_post or any other write tool.",
-              "prompt": "Show the analytics for my last Instagram post and reply to its newest comments."
+              "description": "Writing help only. The user asks for caption ideas and no action on an account, so ChatGPT writes the captions itself. The plugin calls no tool, and no draft or post is created.",
+              "prompt": "Give me three short Instagram caption ideas for our autumn coffee menu."
             },
             {
-              "description": "Reddit and Google Business Profile are not supported in this release. The assistant explains this and does not call create_post or schedule_post for those destinations.",
-              "prompt": "Post our launch announcement to Reddit and to our Google Business Profile."
+              "description": "Likes, comments and comment replies are out of scope: the plugin has no analytics, comment or inbox tools. The assistant can read the post list to find the post, but it does not invent like or comment counts, posts no replies and calls no write tool. It tells the user to check and reply on Instagram.",
+              "prompt": "How many likes and comments did my last Instagram post get? Reply \"Thank you!\" to each new comment."
             },
             {
-              "description": "The plugin has no billing or purchase tools. The assistant does not change the plan, buy account slots, show prices or give checkout links, and it states that it made no changes or purchases.",
-              "prompt": "Upgrade my Social media studio plan and buy five extra social account slots."
+              "description": "Reddit and Google Business Profile are not supported in this release. The assistant says so, calls no write tool (create_post, schedule_post or create_draft) and publishes nothing.",
+              "prompt": "Post our launch announcement to our subreddit and to our Google Business Profile: \"Social media studio now works inside ChatGPT.\""
             }
           ]
         },
-        "demo_recording_url": "https://cdn.so-me.studio/review/openai/social-media-studio-chatgpt-demo-1.3.1.mp4",
+        "demo_recording_url": "https://cdn.so-me.studio/review/openai/social-media-studio-chatgpt-demo-1.3.1-v2.mp4",
         "commerce": false,
         "commerce_description": "The plugin does not sell products, show prices, or process payments."
       },
