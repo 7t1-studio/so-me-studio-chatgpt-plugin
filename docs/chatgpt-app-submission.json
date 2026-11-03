@@ -15,7 +15,7 @@
         "destructiveHint": false
       },
       "justifications": {
-        "read_only_justification": "Read-only: it compares file properties with the configured media rules of each destination. It does not create, change or delete data.",
+        "read_only_justification": "Read-only: it compares file properties with the configured media rules of each destination. A library file that was never measured is measured in memory and the result is not saved. It does not create, change or delete data.",
         "open_world_justification": "It reads data that belongs to the user's connected workspace and accounts, and it publishes nothing to any public or third-party destination.",
         "destructive_justification": "It makes no change, so it cannot destroy or overwrite data."
       }
@@ -96,12 +96,12 @@
       "annotations": {
         "readOnlyHint": false,
         "openWorldHint": false,
-        "destructiveHint": false
+        "destructiveHint": true
       },
       "justifications": {
         "read_only_justification": "Changes the post status from scheduled to pending. It writes data, so it is not read-only.",
         "open_world_justification": "It changes only the So-me Studio workspace; nothing is published or removed on a social network.",
-        "destructive_justification": "The post stays in the workspace and can be scheduled again, so no data is lost."
+        "destructive_justification": "It cancels the queued publication and clears the scheduled time, so the host asks the user to confirm first. The post itself stays in the workspace."
       }
     },
     "delete_post": {
@@ -267,7 +267,7 @@
         "destructiveHint": false
       },
       "justifications": {
-        "read_only_justification": "Read-only: it returns one media library file and can check that its upload finished. It does not create, change or delete data.",
+        "read_only_justification": "Read-only: it returns one media library file. With verifyUpload it also checks that the uploaded object exists in storage with the declared type and size. It does not create, change or delete data.",
         "open_world_justification": "It reads data that belongs to the user's connected workspace and accounts, and it publishes nothing to any public or third-party destination.",
         "destructive_justification": "It makes no change, so it cannot destroy or overwrite data."
       }
