@@ -1,7 +1,7 @@
 {
   "name": "so-me-studio",
-  "version": "1.3.1",
-  "description": "Draft, publish, and schedule social posts with images, videos, thread chains, and automatic first comments on supported platforms.",
+  "version": "1.3.2",
+  "description": "Plan, schedule, and publish your brand's social media marketing posts to the accounts you have connected in So-me Studio, including X, Facebook, Instagram, LinkedIn, TikTok, YouTube, Threads, Pinterest, Bluesky, and Mastodon. Supports images, videos, thread chains, and automatic first comments on supported platforms.",
   "author": {
     "name": "7t1 Studio / So-me Studio",
     "email": "support@so-me.studio",
@@ -12,20 +12,20 @@
   "license": "MIT",
   "keywords": [
     "social-media",
-    "productivity",
+    "social-media-marketing",
+    "social-media-scheduling",
+    "social-publishing",
+    "marketing",
     "content-calendar",
-    "posting",
-    "scheduling",
-    "drafts",
     "so-me-studio"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Social media studio",
-    "shortDescription": "Publish and schedule posts",
-    "longDescription": "Social media studio is a productivity tool for social media work. Plan, schedule, and publish a week of posts to all your connected So-me Studio accounts from one ChatGPT conversation, without switching between social apps. Create multi-post threads on X, Threads, Bluesky, and Mastodon, and add an automatic first comment on supported platforms. Choose images and videos from your media library, check platform compatibility before you upload, review your posting calendar, edit upcoming posts, and track publication status. For social media managers, creators, and small businesses that already use So-me Studio. Requires a So-me Studio account with API/MCP access and connected social accounts. Media, thread, and first-comment support depends on the destination platform. Reddit and Google Business Profile are not supported in this release. The plugin does not provide analytics, inbox replies, billing, or AI image and video generation.",
+    "shortDescription": "Plan and publish social posts",
+    "longDescription": "Social media studio helps brands and businesses run their social media marketing from ChatGPT: plan, schedule, and publish posts to the accounts you have connected in So-me Studio. Destinations include X, Facebook, Instagram, LinkedIn, TikTok, YouTube, Threads, Pinterest, Bluesky, Mastodon, WordPress, Dev.to, Dribbble, Discord, and Slack. Plan a week of posts in one conversation: write drafts, schedule them, create threads on X, Threads, Bluesky, and Mastodon, and add an automatic first comment on supported platforms. Pick images and videos from your media library, check platform compatibility before you upload, review your posting calendar, edit or unschedule upcoming posts, and track publication status. For marketing teams, social media managers, creators, and small businesses that use So-me Studio. Requires a So-me Studio account with API/MCP access and connected social accounts. Media, thread, and first-comment support depends on the destination platform. Reddit and Google Business Profile are not supported in this release. The plugin does not provide analytics, inbox replies, billing, or AI image and video generation.",
     "developerName": "Social media studio",
-    "category": "Productivity",
+    "category": "Business & Operations",
     "capabilities": [
       "Read",
       "Write"
@@ -100,7 +100,7 @@
         "commerce_description": "The plugin does not sell products, show prices, or process payments."
       },
       "publication": {
-        "release_notes": "Version 1.3.1 has a clearer description, support and terms links, and updated review materials. Drafting, publishing, scheduling, media checks and the social-posting skill work as in 1.3.0."
+        "release_notes": "Version 1.3.2 corrects tool annotations. unschedule_post is marked destructive because it cancels a queued publication. validate_post_media and get_media_file no longer store media measurements, so they are read-only. Tool descriptions now say what each write does on the social network."
       }
     }
   }
